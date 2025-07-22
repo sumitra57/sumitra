@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCA Specialization Total Count</title>
+</head>
+<body>
+
+    <h2>GIFT AUTONOMOUS COLLEGE, BBSR</h2>
+    <div id="result"></div>
+
+    <script>
+        const mcaStudents = [
+            // Full Stack - 12 students
+            { name: "Ravi", specialization: "Full Stack", college: "Gift Autonomous College, BBSR" },
+            { name: "Anita", specialization: "Full Stack", college: "Gift Autonomous College, BBSR" },
+            { name: "Sumit", specialization: "Full Stack", college: "Gift Autonomous College, BBSR" },
+            { name: "Priya", specialization: "Full Stack", college: "Gift Autonomous College, BBSR" },
+            { name: "Amit", specialization: "Full Stack", college: "Gift Autonomous College, BBSR" },
+            { name: "Rohit", specialization: "Full Stack", college: "Gift Autonomous College, BBSR" },
+            { name: "Deepa", specialization: "Full Stack", college: "Gift Autonomous College, BBSR" },
+            { name: "Karan", specialization: "Full Stack", college: "Gift Autonomous College, BBSR" },
+            { name: "Swati", specialization: "Full Stack", college: "Gift Autonomous College, BBSR" },
+            { name: "Vikas", specialization: "Full Stack", college: "Gift Autonomous College, BBSR" },
+            { name: "Neha", specialization: "Full Stack", college: "Gift Autonomous College, BBSR" },
+            { name: "Suresh", specialization: "Full Stack", college: "Gift Autonomous College, BBSR" },
+
+            // AI/ML - 11 students
+            { name: "Sneha", specialization: "AI/ML", college: "Gift Autonomous College, BBSR" },
+            { name: "Raj", specialization: "AI/ML", college: "Gift Autonomous College, BBSR" },
+            { name: "Meena", specialization: "AI/ML", college: "Gift Autonomous College, BBSR" },
+            { name: "Anil", specialization: "AI/ML", college: "Gift Autonomous College, BBSR" },
+            { name: "Komal", specialization: "AI/ML", college: "Gift Autonomous College, BBSR" },
+            { name: "Sunil", specialization: "AI/ML", college: "Gift Autonomous College, BBSR" },
+            { name: "Pooja", specialization: "AI/ML", college: "Gift Autonomous College, BBSR" },
+            { name: "Yogesh", specialization: "AI/ML", college: "Gift Autonomous College, BBSR" },
+            { name: "Divya", specialization: "AI/ML", college: "Gift Autonomous College, BBSR" },
+            { name: "Sanjay", specialization: "AI/ML", college: "Gift Autonomous College, BBSR" },
+            { name: "Kavita", specialization: "AI/ML", college: "Gift Autonomous College, BBSR" },
+
+            // Data Analysis - 8 students
+            { name: "Alok", specialization: "Data Analysis", college: "Gift Autonomous College, BBSR" },
+            { name: "Manisha", specialization: "Data Analysis", college: "Gift Autonomous College, BBSR" },
+            { name: "Shyam", specialization: "Data Analysis", college: "Gift Autonomous College, BBSR" },
+            { name: "Ritu", specialization: "Data Analysis", college: "Gift Autonomous College, BBSR" },
+            { name: "Prakash", specialization: "Data Analysis", college: "Gift Autonomous College, BBSR" },
+            { name: "Vinay", specialization: "Data Analysis", college: "Gift Autonomous College, BBSR" },
+            { name: "Kiran", specialization: "Data Analysis", college: "Gift Autonomous College, BBSR" },
+            { name: "Seema", specialization: "Data Analysis", college: "Gift Autonomous College, BBSR" },
+
+            // MERN Stack - 20 students
+            ...Array.from({length: 20}, (_, i) => ({
+                name: `MERNStudent${i+1}`,
+                specialization: "MERN Stack",
+                college: "Gift Autonomous College, BBSR"
+            }))
+        ];
+
+        function countAllSpecializations() {
+            const count = {};
+            let totalStudents = 0;
+
+            mcaStudents.forEach(student => {
+                totalStudents++;
+                if (count[student.specialization]) {
+                    count[student.specialization]++;
+                } else {
+                    count[student.specialization] = 1;
+                }
+            });
+
+            return { count, totalStudents };
+        }
+
+        const { count: specializationCount, totalStudents } = countAllSpecializations();
+
+        let output = "";
+        for (const [specialization, count] of Object.entries(specializationCount)) {
+            output += `${specialization}: ${count}<br>`;
+        }
+
+        output += `<br><strong>Total Students: ${totalStudents}</strong>`;
+
+        document.getElementById('result').innerHTML = output;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,2147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ekomart Clone</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+    }
+
+    .top-bar {
+      background: #f7f7f7;
+      font-size: 14px;
+    }
+
+    .navbar-brand span {
+      color: green;
+      font-weight: bold;
+    }
+
+    .hero {
+      color: white;
+      position: relative;
+    }
+
+    .hero-content {
+      position: absolute;
+      top: 30%;
+      left: 10%;
+    }
+
+    .category-img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+
+    .feature-box {
+      border: 1px solid #eee;
+      padding: 15px;
+      text-align: center;
+      border-radius: 8px;
+      height: 100%;
+      background: #f9f9f9;
+    }
+
+    .product-card img {
+      height: 150px;
+      object-fit: contain;
+    }
+
+    .badge-new {
+      background-color: #28a745;
+      color: white;
+      font-size: 12px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    
+
+    .category-card {
+      border: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease;
+      background-color: #ffffff;
+      border-radius: 12px;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .category-card img {
+      max-height: 80px;
+      object-fit: contain;
+    }
+
+    .category-title {
+      font-weight: 600;
+      margin-top: 10px;
+      color: #333;
+    }
+  /* Remove extra padding/margin that pushes to right */
+  .container-fix {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  /* Ensure row does not overflow */
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* Fix card alignment inside columns */
+  .col > .border {
+    height: 100%;
+  }
+
+  /* Fix horizontal scroll or shifting */
+  body {
+    overflow-x: hidden;
+  }
+
+
+  </style>
+</head>
+
+<body>
+
+
+ <!-- Top Offer Bar -->
+<!-- Top Bar with Offer and Timer -->
+<div class="bg-success text-white py-1 px-3 d-flex justify-content-between align-items-center">
+  <div>
+    FREE delivery & 40% Discount for next 3 orders! Place your 1st order in.
+    <span class="ms-2">83 Days</span>
+    <span class="ms-2">17 Hour</span>
+    <span class="ms-2">49 Min</span>
+    <span class="ms-2" id="seconds">10 Sec</span>
+  </div>
+  <div>
+    <script>
+      // Initialize seconds counter
+      let seconds = 10;
+      const secondsElement = document.getElementById('seconds');
+      
+      // Update seconds every second
+      const timer = setInterval(() => {
+        seconds--;
+        secondsElement.textContent = seconds + ' Sec';
+        
+        if (seconds <= 0) {
+          clearInterval(timer);
+          secondsElement.textContent = '0 Sec';
+        }
+      }, 1000);
+    </script>
+  </div>
+</div>
+    Need Help? Call Us: <strong>+258 326821485</strong>
+  </div>
+</div>
+
+<!-- Top Links Bar -->
+<div class="bg-light py-2 px-3 d-flex justify-content-between align-items-center border-bottom">
+  <div>
+    <a href="#" class="text-decoration-none text-dark me-3">About Us</a>
+    <a href="#" class="text-decoration-none text-dark me-3">My Account</a>
+    <a href="#" class="text-decoration-none text-dark me-3">Wishlist</a>
+  </div>
+  <div>
+    We deliver to your everyday from 7:00 to 22:00
+  </div>
+  <div>
+    <select class="form-select d-inline w-auto me-2">
+      <option>English</option>
+      <option>Hindi</option>
+    </select>
+    <select class="form-select d-inline w-auto me-2">
+      <option>USD</option>
+      <option>INR</option>
+    </select>
+    <a href="#" class="btn btn-outline-dark btn-sm">Track Order</a>
+  </div>
+</div>
+
+<!-- JavaScript to update only the seconds timer -->
+<script>
+  let seconds = 10;
+  setInterval(() => {
+    seconds--;
+    if (seconds < 0) {
+      seconds = 59;
+    }
+    document.getElementById('seconds').textContent = seconds + ' Sec';
+  }, 1000);
+</script>
+
+
+<!-- Logo, Categories, Searchbar, Account, Wishlist, Cart -->
+
+<div class="container py-3 d-flex align-items-center justify-content-between">
+
+  <!-- Logo -->
+  <div class="d-flex align-items-center">
+    <img src="ecomart.avif" alt="Ekomart Logo" style="width:100px; height:100px;">
+    <h4 class="ms-2 mb-0 fw-bold">EKOMART</h4>
+  </div>
+
+  <!-- Categories Button -->
+  <!-- Categories Dropdown -->
+<div class="d-flex align-items-left">
+  <!-- Categories Dropdown -->
+  <div class="dropdown me-2">
+    <button class="btn btn-success dropdown-toggle" type="button" id="categoriesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-list"></i> Categories
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+      <li><a class="dropdown-item" href="#"><i class="bi bi-apple"></i> Breakfast & Dairy</a></li>
+      <li><a class="dropdown-item" href="#"><i class="bi bi-egg-fried"></i> Meats & Seafood</a></li>
+      <li><a class="dropdown-item" href="#"><i class="bi bi-basket"></i> Breads & Bakery</a></li>
+      <li><a class="dropdown-item" href="#"><i class="bi bi-cup-straw"></i> Chips & Snacks</a></li>
+      <li><a class="dropdown-item" href="#"><i class="bi bi-capsule"></i> Medical Healthcare</a></li>
+      <li><a class="dropdown-item" href="#"><i class="bi bi-basket"></i> Breads & Bakery</a></li>
+      <li><a class="dropdown-item" href="#"><i class="bi bi-bag"></i> Biscuits & Snacks</a></li>
+      <li><a class="dropdown-item" href="#"><i class="bi bi-snow"></i> Frozen Foods</a></li>
+      <li><a class="dropdown-item" href="#"><i class="bi bi-basket-fill"></i> Grocery & Staples</a></li>
+      <li><a class="dropdown-item" href="#"><i class="bi bi-box"></i> Other Items</a></li>
+    </ul>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="input-group" style="width: 500px;">
+    <input type="text" class="form-control" placeholder="Search for products, categories or...">
+    <button class="btn btn-success">
+      Search <i class="bi bi-search ms-1"></i>
+    </button>
+  </div>
+</div>
+
+
+
+  <!-- Icons: Account, Wishlist, Cart -->
+<div class="d-flex align-items-center gap-3">
+    <a href="#" class="text-dark fs-5"><i class="bi bi-person"></i></a>
+    <a href="#" class="text-dark fs-5"><i class="bi bi-heart"></i></a>
+    <a href="#" class="text-dark fs-5 position-relative dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="cartDropdown">
+      <i class="bi bi-cart"></i>
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+        1
+      </span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-end p-0" aria-labelledby="cartDropdown">
+      <div class="p-3 border-bottom">
+        <h5 class="m-0">Shopping Cart (01)</h5>
+      </div>
+      
+      <div class="px-3 pt-2 pb-1">
+        <p class="cart-description mb-2">Details Profitable business makes your profit</p>
+        <div class="d-flex justify-content-between">
+          <span>1 X $29.00</span>
+        </div>
+      </div>
+      
+      <div class="px-3 py-2 border-top">
+        <h6 class="mb-1">Sub Total:</h6>
+        <h5 class="mb-1">$29.00</h5>
+        <p class="shipping-message mb-0">Spend More $96.00 to reach Free Shipping</p>
+      </div>
+      
+      <div class="p-3 d-flex flex-column gap-2 border-top">
+        <a href="#" class="btn btn-view-cart">View Cart</a>
+        <a href="#" class="btn btn-checkout">CheckOut</a>
+      </div>
+      
+      <div class="p-2 shaping-now-section border-top">
+        <strong class="d-block mb-1">Shaping Now:</strong>
+        <div class="shaping-details">
+          <strong>ENG IN</strong><br>
+          11:10<br>
+          14-07-2025
+        </div>
+      </div>
+    </div>
+</div>
+
+<style>
+  /* Custom CSS matching your image dimensions */
+  .dropdown-menu {
+    width: 300px;
+    border: none;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    padding-bottom: 0;
+  }
+  
+  #cartDropdown:hover {
+    color: #dc3545 !important;
+  }
+  
+  .cart-description {
+    color: #6c757d;
+    font-size: 13px;
+    font-style: italic;
+    line-height: 1.3;
+  }
+  
+  .shipping-message {
+    color: #6c757d;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+  
+  .btn-view-cart {
+    background: white;
+    color: #495057;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 13px;
+    transition: all 0.2s;
+  }
+  
+  .btn-view-cart:hover {
+    background: #f8f9fa;
+    border-color: #adb5bd;
+  }
+  
+  .btn-checkout {
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  
+  .btn-checkout:hover {
+    background: #218838;
+  }
+  
+  .shaping-now-section {
+    background-color: #f8f9fa;
+    font-size: 12px;
+  }
+  
+  .shaping-details {
+    color: #495057;
+    line-height: 1.4;
+  }
+  
+  .dropdown-menu h5 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #212529;
+  }
+  
+  .dropdown-menu h6 {
+    font-size: 13px;
+    color: #6c757d;
+    font-weight: 500;
+  }
+  
+  .dropdown-menu h5.mb-1 {
+    font-size: 16px;
+    color: #212529;
+  }
+  
+  .border-top, .border-bottom {
+    border-color: #e9ecef !important;
+  }
+</style>
+
+
+
+
+
+<!-- Bootstrap Icons CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+
+</div>
+
+
+   
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Fruits & Vegetables</a></li>
+        <li><a class="dropdown-item" href="#">Dairy Products</a></li>
+        <li><a class="dropdown-item" href="#">Snacks</a></li>
+        <li><a class="dropdown-item" href="#">Beverages</a></li>
+        <li><a class="dropdown-item" href="#">Personal Care</a></li>
+      </ul>
+    </div>
+
+</nav>
+
+
+
+</nav>
+
+
+  
+  <!-- <body> -->
+
+    <!-- Navigation Menu -->
+    <div class="bg-light border-top border-bottom py-2">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
+          <div class="container-fluid">
+
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+              aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Items -->
+            <div class="collapse navbar-collapse" id="mainNavbar">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex gap-lg-3">
+
+                <!-- Home Dropdown with icons -->
+                 
+              <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+              
+
+<!-- Navbar Home Dropdown -->
+<ul class="navbar-nav">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Home
+    </a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Home One</a></li>
+      <li><a class="dropdown-item" href="#">Home Two</a></li>
+      <li><a class="dropdown-item" href="#">Home Three</a></li>
+      <li><a class="dropdown-item" href="#">Home Four</a></li>
+    </ul>
+  </li>
+</ul>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<li class="nav-item">
+  <a class="nav-link" href="#">About</a>
+</li>
+
+
+
+                <!-- Shop -->
+
+
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="fas fa-shopping-bag me-1"></i> Shop</a>
+                </li>
+
+
+
+                <!-- Vendor Dropdown with icons -->
+
+                <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="vendorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Vendors
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="vendorDropdown">
+    <li><a class="dropdown-item" href="#">Vendor List</a></li>
+    <li><a class="dropdown-item" href="#">Vendor Grid</a></li>
+    <li><a class="dropdown-item" href="#">Vendor Details</a></li>
+  </ul>
+</li>
+
+                <!-- Pages -->
+                <!-- Navbar Pages Dropdown Code -->
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Pages
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
+    <li><a class="dropdown-item" href="#">Dashboard <span class="badge bg-success ms-1">New</span></a></li>
+    <li><a class="dropdown-item" href="#">About</a></li>
+    <li><a class="dropdown-item" href="#">Store</a></li>
+    <li><a class="dropdown-item" href="#">FAQs</a></li>
+    <li><a class="dropdown-item" href="#">Invoice</a></li>
+    <li><a class="dropdown-item" href="#">Contact</a></li>
+    <li><a class="dropdown-item" href="#">Register</a></li>
+    <li><a class="dropdown-item" href="#">Login</a></li>
+    <li><a class="dropdown-item" href="#">Privacy Policy</a></li>
+    <li><a class="dropdown-item" href="#">Cookies Policy</a></li>
+    <li><a class="dropdown-item" href="#">Terms & Condition</a></li>
+  </ul>
+</li>
+
+<!--Blog-->
+</li>
+<li class="nav-item">
+  <a class="nav-link"
+  href="#">Blog</a>
+</li>
+
+
+                <!-- Dashboard -->
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="fas fa-chart-line me-1"></i> Dashboard</a>
+                </li>
+
+                <!-- Contact -->
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="fas fa-envelope me-1"></i> Contact</a>
+                </li>
+              </ul>
+
+              <!-- Discount Offer -->
+              <a href="#" class="nav-link text-success ms-auto"><i class="fas fa-tags me-1"></i> Get 25% Discount
+                Now</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle (for dropdowns to work) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+
+  </html>
+
+
+
+
+  <!-- Hero Banner Carousel (Auto Slide 1s) -->
+
+
+  <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1000">
+    <div class="carousel-inner">
+
+<style>
+  .hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-content h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-content .btn {
+    font-size: 1.1rem;
+    padding: 0.75rem 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .hero-content h2 {
+      font-size: 2.5rem;
+    }
+    .hero-content p {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .hero-content h2 {
+      font-size: 3rem;
+    }
+    .hero-content p {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+<div class="hero-content text-white text-center p-4">
+  <h2>Don't miss our amazing grocery deals</h2>
+  <p>Save up to 50% on your first order</p>
+  <a href="#" class="btn btn-success">Shop Now</a>
+</div>
+
+
+
+
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <section class="hero d-flex align-items-center"
+          style="background: url('https://plus.unsplash.com/premium_photo-1663039978847-63f7484bf701?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center center/cover no-repeat; height: 350px;">
+          <div class="hero-content text-white">
+            <h2>Don't miss our amazing grocery deals</h2>
+            <p>Save up to 50% on your first order</p>
+            <a href="#" class="btn btn-success">Shop Now</a>
+          </div>
+        </section>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <section class="hero d-flex align-items-center"
+          style="background: url('./grocery\ 2.jpg') center center/cover no-repeat; height: 350px;">
+          <div class="hero-content text-white">
+            <h2>Fresh Fruits & Veggies</h2>
+            <p>Delivered to your doorstep</p>
+            <a href="#" class="btn btn-success">Order Now</a>
+          </div>
+        </section>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item">
+        <section class="hero d-flex align-items-center"
+          style="background: url('./grocery3.webp')center center/cover no-repeat; height: 350px;">
+          <div class="hero-content text-white">
+            <h2>Flash Sale: Up to 70% OFF</h2>
+            <p>Grab your essentials now!</p>
+            <a href="#" class="btn btn-success">Shop Deals</a>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </div>
+
+  <!DOCTYPE html>
+  <html lang="en">
+
+  
+    <style>
+      .category-img {
+        width: 48px;
+        height: 48px;
+      }
+
+      .category-box {
+        min-width: 120px;
+        margin-right: 16px;
+      }
+
+      .slider-track {
+        display: flex;
+        animation: scroll 20s linear infinite;
+      }
+
+      @keyframes scroll {
+        0% {
+          transform: translateX(0);
+        }
+
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      .slider-wrapper {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+
+  <body>
+
+ <!-- Category Slider -->
+<div class="container py-4">
+  <div class="slider-wrapper overflow-hidden position-relative">
+    <div class="slider-track d-flex flex-nowrap gap-3 animate-scroll">
+
+      <!-- Product Box -->
+      <div class="text-center category-box border p-2 bg-white rounded" style="min-width: 220px;">
+        <img src="./cheez it image.jpg" class="category-img mb-2" style="width:100%; height:130px; object-fit:cover;" />
+        <p class="mb-0 fw-semibold small">Organic Vegetables</p>
+        <p class="text-success fw-bold mb-1 small">₹120/kg</p>
+        <button class="btn btn-sm btn-outline-primary w-100">Add to Cart</button>
+      </div>
+
+      <div class="text-center category-box border p-2 bg-white rounded" style="min-width: 220px;">
+        <img src="./oat image.jpg" class="category-img mb-2" style="width:100%; height:130px; object-fit:cover;" />
+        <p class="mb-0 fw-semibold small">Organic Vegetable</p>
+        <p class="text-success fw-bold mb-1 small">₹30/kg</p>
+        <button class="btn btn-sm btn-outline-primary w-100">Add to Cart</button>
+      </div>
+
+      <div class="text-center category-box border p-2 bg-white rounded" style="min-width: 220px;">
+        <img src="./biscuit image.jpg" class="category-img mb-2" style="width:100%; height:130px; object-fit:cover;" />
+        <p class="mb-0 fw-semibold small">Organic Vegetable</p>
+        <p class="text-success fw-bold mb-1 small">₹50/dozen</p>
+        <button class="btn btn-sm btn-outline-primary w-100">Add to Cart</button>
+      </div>
+
+      <div class="text-center category-box border p-2 bg-white rounded" style="min-width: 220px;">
+        <img src="./capsicum.jpg" class="category-img mb-2" style="width:100%; height:130px; object-fit:cover;" />
+        <p class="mb-0 fw-semibold small">Organic Vegetable</p>
+        <p class="text-success fw-bold mb-1 small">₹60/kg</p>
+        <button class="btn btn-sm btn-outline-primary w-100">Add to Cart</button>
+      </div>
+
+      <div class="text-center category-box border p-2 bg-white rounded" style="min-width: 220px;">
+        <img src="./alpro image.jpg" class="category-img mb-2" style="width:100%; height:130px; object-fit:cover;" />
+        <p class="mb-0 fw-semibold small">Organic Vegetable</p>
+        <p class="text-success fw-bold mb-1 small">₹40/kg</p>
+        <button class="btn btn-sm btn-outline-primary w-100">Add to Cart</button>
+      </div>
+
+      <div class="text-center category-box border p-2 bg-white rounded" style="min-width: 220px;">
+        <img src="./chacolate image.jpg" class="category-img mb-2" style="width:100%; height:130px; object-fit:cover;" />
+        <p class="mb-0 fw-semibold small">Organic Vegetable</p>
+        <p class="text-success fw-bold mb-1 small">₹35/kg</p>
+        <button class="btn btn-sm btn-outline-primary w-100">Add to Cart</button>
+      </div>
+
+      <div class="text-center category-box border p-2 bg-white rounded" style="min-width: 220px;">
+        <img src="./spiseimage.jpg" class="category-img mb-2" style="width:100%; height:130px; object-fit:cover;" />
+        <p class="mb-0 fw-semibold small">Spices</p>
+        <p class="text-success fw-bold mb-1 small">₹150/pack</p>
+        <button class="btn btn-sm btn-outline-primary w-100">Add to Cart</button>
+      </div>
+
+      <div class="text-center category-box border p-2 bg-white rounded" style="min-width: 220px;">
+        <img src="https://img.icons8.com/color/48/vegetarian-food.png" class="category-img mb-2" style="width:100%; height:130px; object-fit:cover;" />
+        <p class="mb-0 fw-semibold small">Organic Vegetables</p>
+        <p class="text-success fw-bold mb-1 small">₹120/kg</p>
+        <button class="btn btn-sm btn-outline-primary w-100">Add to Cart</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+      
+
+<!-- Style for scrolling animation -->
+
+<style>
+  .animate-scroll {
+    animation: scrollLeft 40s linear infinite;
+    width: max-content;
+  }
+
+  @keyframes scrollLeft {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>
+  
+</div>
+
+    <!-- Features Section -->
+
+<style>
+.feature-box {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  min-height: 120px;
+  min-width: 100px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+</style>
+
+
+
+
+<div class="container py-4">
+  <div class="row g-3 text-center justify-content-center">
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+      <div class="feature-box p-4 border rounded bg-white h-100 d-flex flex-column justify-content-center align-items-center" style="min-height: 130px;">
+        <div class="fw-bold fs-5 mb-2">Wide Assortment</div>
+        <div class="small text-muted">Orders $50 or more</div>
+      </div>
+    </div>
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+      <div class="feature-box p-4 border rounded bg-white h-100 d-flex flex-column justify-content-center align-items-center" style="min-height: 130px;">
+        <div class="fw-bold fs-5 mb-2">Easy Return Policy</div>
+        <div class="small text-muted">Orders $50 or more</div>
+      </div>
+    </div>
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+      <div class="feature-box p-4 border rounded bg-white h-100 d-flex flex-column justify-content-center align-items-center" style="min-height: 130px;">
+        <div class="fw-bold fs-5 mb-2">Best Prices & Offers</div>
+        <div class="small text-muted">Orders $50 or more</div>
+      </div>
+    </div>
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+      <div class="feature-box p-4 border rounded bg-white h-100 d-flex flex-column justify-content-center align-items-center" style="min-height: 130px;">
+        <div class="fw-bold fs-5 mb-2">Support 24/7</div>
+        <div class="small text-muted">Orders $50 or more</div>
+      </div>
+    </div>
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+      <div class="feature-box p-4 border rounded bg-white h-100 d-flex flex-column justify-content-center align-items-center" style="min-height: 130px;">
+        <div class="fw-bold fs-5 mb-2">Fast Delivery</div>
+        <div class="small text-muted">Orders $50 or more</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  <!-- Featured Products -->
+<div class="container py-5">
+  <h4 class="mb-4">Featured Grocery</h4>
+  <div class="scroll-wrapper overflow-hidden">
+    <div class="scroll-track d-flex">
+
+      <!-- Repeat Start -->
+      <div class="d-flex flex-nowrap gap-4">
+        <!-- Heading and Filter Buttons Row -->
+
+
+       <!-- Product 1 -->
+<div class="card position-relative product-card" style="min-width: 220px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#productModal1">
+  <span class="badge-new position-absolute top-0 start-0 bg-danger text-white px-2 py-1">New</span>
+  <div class="ratio ratio-16x9">
+    <img src="./biscuit image.jpg" class="card-img-top object-fit-contain p-2" alt="Nutify Biscuits" />
+  </div>
+  <div class="card-body">
+    <h6>Nutify Biscuits</h6>
+    <p class="text-muted small mb-1">Best-one profitable business makes your profit</p>
+    <p class="small mb-1">500g pack</p>
+    <div class="product-footer d-flex justify-content-between align-items-center">
+      <p class="fw-bold text-success mb-0">$10.00</p>
+      <button class="btn btn-sm btn-outline-success"><i class="bi bi-cart-plus"></i> Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Product 2 -->
+<div class="card product-card" style="min-width: 220px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#productModal2">
+  <div class="ratio ratio-16x9">
+    <img src="./portfolioimage.jpg" class="card-img-top object-fit-contain p-2" alt="Delite Portfolio" />
+  </div>
+  <div class="card-body">
+    <h6>Delite Portfolio</h6>
+    <p class="text-muted small mb-1">Best-one profitable business makes your profit</p>
+    <p class="small mb-1">500g pack</p>
+    <div class="product-footer d-flex justify-content-between align-items-center">
+      <p class="fw-bold text-success mb-0">$8.99</p>
+      <button class="btn btn-sm btn-outline-success"><i class="bi bi-cart-plus"></i> Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Product 3 -->
+<div class="card product-card" style="min-width: 220px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#productModal3">
+  <div class="ratio ratio-16x9">
+    <img src="./chacolate image.jpg" class="card-img-top object-fit-contain p-2" alt="Chocolate Pancakes" />
+  </div>
+  <div class="card-body">
+    <h6>Chocolate Pancakes</h6>
+    <p class="text-muted small mb-1">Best-one profitable business makes your profit</p>
+    <p class="small mb-1">500g pack</p>
+    <div class="product-footer d-flex justify-content-between align-items-center">
+      <p class="fw-bold text-success mb-0">$6.99</p>
+      <button class="btn btn-sm btn-outline-success"><i class="bi bi-cart-plus"></i> Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Product 4 -->
+<div class="card product-card" style="min-width: 220px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#productModal4">
+  <div class="ratio ratio-16x9">
+    <img src="./oat image.jpg" class="card-img-top object-fit-contain p-2" alt="Oatmeal Cereal" />
+  </div>
+  <div class="card-body">
+    <h6>Oatmeal Cereal</h6>
+    <p class="text-muted small mb-1">Best-one profitable business makes your profit</p>
+    <p class="small mb-1">500g pack</p>
+    <div class="product-footer d-flex justify-content-between align-items-center">
+      <p class="fw-bold text-success mb-0">$12.99</p>
+      <button class="btn btn-sm btn-outline-success"><i class="bi bi-cart-plus"></i> Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Product 5 -->
+<div class="card product-card" style="min-width: 220px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#productModal5">
+  <div class="ratio ratio-16x9">
+    <img src="./meal.jpg" class="card-img-top object-fit-contain p-2" alt="Healthy Meal Combo" />
+  </div>
+  <div class="card-body">
+    <h6>Healthy Meal Combo</h6>
+    <p class="text-muted small mb-1">Best-one profitable business makes your profit</p>
+    <p class="small mb-1">500g pack</p>
+    <div class="product-footer d-flex justify-content-between align-items-center">
+      <p class="fw-bold text-success mb-0">$5.88</p>
+      <button class="btn btn-sm btn-outline-success"><i class="bi bi-cart-plus"></i> Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Product 6 -->
+<div class="card product-card" style="min-width: 220px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#productModal6">
+  <div class="ratio ratio-16x9">
+    <img src="./cookies image.webp" class="card-img-top object-fit-contain p-2" alt="Crunchy Cookies" />
+  </div>
+  <div class="card-body">
+    <h6>Crunchy Cookies</h6>
+    <p class="text-muted small mb-1">Best-one profitable business makes your profit</p>
+    <p class="small mb-1">500g pack</p>
+    <div class="product-footer d-flex justify-content-between align-items-center">
+      <p class="fw-bold text-success mb-0">$4.49</p>
+      <button class="btn btn-sm btn-outline-success"><i class="bi bi-cart-plus"></i> Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Product 7 -->
+<div class="card product-card" style="min-width: 220px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#productModal7">
+  <div class="ratio ratio-16x9">
+    <img src="./dryfruit image.png" class="card-img-top object-fit-contain p-2" alt="Premium Dry Fruits" />
+  </div>
+  <div class="card-body">
+    <h6>Premium Dry Fruits</h6>
+    <p class="text-muted small mb-1">Best-one profitable business makes your profit</p>
+    <p class="small mb-1">500g pack</p>
+    <div class="product-footer d-flex justify-content-between align-items-center">
+      <p class="fw-bold text-success mb-0">$15.75</p>
+      <button class="btn btn-sm btn-outline-success"><i class="bi bi-cart-plus"></i> Add</button>
+    </div>
+  </div>
+</div>
+
+    
+
+    </div>
+  </div>
+</div>
+
+<!-- Required CSS -->
+<style>
+  .scroll-wrapper {
+    overflow: hidden;
+  }
+
+  .scroll-track {
+    animation: scrollProducts 40s linear infinite;
+    width: max-content;
+  }
+
+  @keyframes scrollProducts {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .product-card {
+    transition: transform 0.3s;
+  }
+
+  .product-card:hover {
+    transform: scale(1.05);
+  }
+
+  .badge-new {
+    font-size: 0.75rem;
+    z-index: 1;
+  }
+</style>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Products with Discounts Section -->
+<div class="container my-5">
+  <div class="p-4 bg-warning-subtle rounded shadow-lg">
+    <div class="d-flex justify-content-between align-items-center flex-wrap">
+      
+      <!-- Left Heading -->
+      <h3 class="mb-0 text-dark">🛒 Products with Discounts</h3>
+
+      <!-- Right Countdown Timer -->
+      <div class="d-flex gap-3 text-center" id="countdown-timer">
+        <div class="bg-dark text-white px-3 py-2 rounded">
+          <div class="fs-5 fw-bold" id="days">000</div>
+          <div style="font-size: 13px;">Days</div>
+        </div>
+        <div class="bg-dark text-white px-3 py-2 rounded">
+          <div class="fs-5 fw-bold" id="hours">00</div>
+          <div style="font-size: 13px;">Hours</div>
+        </div>
+        <div class="bg-dark text-white px-3 py-2 rounded">
+          <div class="fs-5 fw-bold" id="minutes">00</div>
+          <div style="font-size: 13px;">Min</div>
+        </div>
+        <div class="bg-dark text-white px-3 py-2 rounded">
+          <div class="fs-5 fw-bold" id="seconds">00</div>
+          <div style="font-size: 13px;">Sec</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Countdown Timer Script -->
+<script>
+  function startCountdown() {
+    // Set target time (you can modify this)
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 148); // 148 days from now
+
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate.getTime() - now;
+
+      if (distance < 0) return;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").textContent = String(days).padStart(3, '0');
+      document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+    }, 1000);
+  }
+
+  // Start the countdown
+  startCountdown();
+</script>
+
+
+<!-- Big Discount Display Section -->
+<div class="container my-5">
+  <div class="row g-4 p-4 rounded shadow-lg" style="background-color: #e9f5e9;">
+    
+    <!-- Left Side: Two Big Boxes -->
+    <div class="col-lg-8">
+      <!-- Top Orange Box -->
+      <div class="d-flex justify-content-between align-items-center p-5 mb-4 rounded" 
+           style="background-color: orange; color: white; min-height: 300px;">
+        <div>
+          <h2 class="fw-bold mb-2">Alpro Organic Flavoured Fresh Juice</h2>
+          <p class="fs-3 mb-0">Only $15.00</p>
+        </div>
+        <img src="./alpro image.jpg" alt="Juice" class="img-fluid rounded" style="max-width: 240px;">
+      </div>
+
+      <!-- Bottom Green Box -->
+      <div class="d-flex justify-content-between align-items-center p-5 rounded" 
+           style="background-color: green; color: white; min-height: 300px;">
+        <div>
+          <h2 class="fw-bold mb-2">Alpro Organic Flavoured Fresh Juice</h2>
+          <p class="fs-3 mb-0">Only $15.00</p>
+        </div>
+        <img src="./fresh-cut-fruits-pack.png" alt="Juice" class="img-fluid rounded" style="max-width: 240px;">
+      </div>
+    </div>
+
+    <!-- Right Side: 4 Product Boxes (2 Up, 2 Down) -->
+    <div class="col-lg-4 d-flex flex-column justify-content-between" style="height: 600px;">
+      
+      <!-- Top 2 Boxes -->
+      <div class="row g-3 mb-3" style="height: 50%;">
+        <div class="col-6 h-100">
+          <div class="p-3 bg-white rounded shadow-sm h-100 d-flex flex-column justify-content-between">
+            <div class="d-flex">
+              <img src="https://img.freepik.com/free-photo/packaged-cookies_144627-14634.jpg"
+                   class="img-fluid rounded me-2" style="width: 70px; height: 70px; object-fit: cover;">
+              <div>
+                <p class="mb-1 fw-semibold small">Profitable business makes your profit</p>
+                <p class="mb-1 text-muted small">500g pack</p>
+                <p class="mb-1 text-danger small"><del>$36.00</del></p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between mt-2">
+              <button class="btn btn-sm btn-outline-secondary px-2">▲▼</button>
+              <button class="btn btn-sm btn-success d-flex align-items-center gap-1 px-2">
+                <span class="small">Add</span><i class="bi bi-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 h-100">
+          <div class="p-3 bg-white rounded shadow-sm h-100 d-flex flex-column justify-content-between">
+            <div class="d-flex">
+              <img src="./alpro image.jpg" class="img-fluid rounded me-2" style="width: 70px; height: 70px; object-fit: cover;">
+              <div>
+                <p class="mb-1 fw-semibold small">Firebase business makes your profit</p>
+                <p class="mb-1 text-muted small">500g pack</p>
+                <p class="mb-1 text-danger small"><del>$36.00</del></p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between mt-2">
+              <button class="btn btn-sm btn-outline-secondary px-2">▲▼</button>
+              <button class="btn btn-sm btn-success d-flex align-items-center gap-1 px-2">
+                <span class="small">Add</span><i class="bi bi-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom 2 Boxes -->
+      <div class="row g-3" style="height: 50%;">
+        <div class="col-6 h-100">
+          <div class="p-3 bg-white rounded shadow-sm h-100 d-flex flex-column justify-content-between">
+            <div class="d-flex">
+              <img src="./dryfruit image.png" class="img-fluid rounded me-2" style="width: 70px; height: 70px; object-fit: cover;">
+              <div>
+                <p class="mb-1 fw-semibold small">Netlyfy business makes your profit</p>
+                <p class="mb-1 text-muted small">500g pack</p>
+                <p class="mb-1 text-danger small"><del>$36.00</del></p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between mt-2">
+              <button class="btn btn-sm btn-outline-secondary px-2">▲▼</button>
+              <button class="btn btn-sm btn-success d-flex align-items-center gap-1 px-2">
+                <span class="small">Add</span><i class="bi bi-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 h-100">
+          <div class="p-3 bg-white rounded shadow-sm h-100 d-flex flex-column justify-content-between">
+            <div class="d-flex">
+              <img src="./fresh-cut-fruits-pack.png" class="img-fluid rounded me-2" style="width: 70px; height: 70px; object-fit: cover;">
+              <div>
+                <p class="mb-1 fw-semibold small">Details business makes your profit</p>
+                <p class="mb-1 text-muted small">500g pack</p>
+                <p class="mb-1 text-danger small"><del>$36.00</del></p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between mt-2">
+              <button class="btn btn-sm btn-outline-secondary px-2">▲▼</button>
+              <button class="btn btn-sm btn-success d-flex align-items-center gap-1 px-2">
+                <span class="small">Add</span><i class="bi bi-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Weekly Best Selling Groceries Section -->
+<style>
+  .product-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card .hover-icons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .product-card:hover .hover-icons {
+    opacity: 1;
+  }
+
+  .hover-icons button {
+    border: none;
+    background-color: #fff;
+    color: #333;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+  }
+
+  .hover-icons button:hover {
+    background-color: #28a745;
+    color: #fff;
+  }
+</style>
+
+
+
+<!-- Weekly Best Selling Groceries Section -->
+<div class="row g-3">
+  <!-- Repeat for each product below (1 to 12) -->
+ <style>
+  .product-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card img {
+    width: 100%;
+    display: block;
+  }
+
+  .product-card .badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+  }
+
+  .hover-icons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+  }
+
+  .product-card:hover .hover-icons {
+    opacity: 1;
+  }
+
+  .hover-icons button {
+    border: none;
+    background-color: #fff;
+    color: #333;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+  }
+
+  .hover-icons button:hover {
+    background-color: #28a745;
+    color: #fff;
+  }
+</style>
+
+<!-- Weekly Best Selling Groceries Section -->
+
+
+ 
+<div class="container-fluid py-5 bg-light">
+  <div class="container">
+    <div class="row g-4">
+
+
+
+      <!-- Heading and Filter Buttons Row -->
+
+<div class="d-flex justify-content-between align-items-center mb-3 px-2">
+  <h6 class="mb-0 fw-bold">Weekly Best Selling Groceries</h6>
+  <div class="d-flex flex-wrap gap-2">
+    <button class="btn btn-sm btn-primary">Frozen Foods</button>
+    <button class="btn btn-sm btn-primary">Diet Foods</button>
+    <button class="btn btn-sm btn-primary">Healthy Foods</button>
+    <button class="btn btn-sm btn-primary">Vitamin Items</button>
+  </div>
+</div>
+
+
+      
+      <!-- Product Card Start -->
+      <!-- 1 -->
+     <div class="col-6 col-md-4 col-lg-2">
+        <div class="border p-3 bg-white rounded position-relative h-100 d-flex flex-column">
+          <span class="badge bg-warning position-absolute top-0 start-0 m-2">25% Off</span>
+          <img src="./cocacola image.jpg" class="img-fluid mb-2" alt="Product">
+          <div class="d-flex justify-content-between mb-2">
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-heart"></i></button>
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-arrow-left-right"></i></button>
+            <button class="btn btn-sm btn-success w-100"><i class="bi bi-eye"></i></button>
+          </div>
+          <p class="fw-semibold mb-0">Profitable business makes your profit</p>
+          <small class="text-muted">500g Pack</small>
+          <div class="mt-2">
+            <span class="fw-bold text-danger">$30.00</span>
+            <del class="text-muted ms-1">$36.00</del>
+          </div>
+          <div class="d-flex align-items-center mt-2 mt-auto">
+            <select class="form-select form-select-sm w-auto me-2">
+              <option>1</option><option>2</option><option>3</option>
+            </select>
+            <button class="btn btn-success btn-sm">Add</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+       <div class="col-6 col-md-4 col-lg-2">
+        <div class="border p-3 bg-white rounded position-relative h-100 d-flex flex-column">
+          <span class="badge bg-warning position-absolute top-0 start-0 m-2">25% Off</span>
+          <img src="./cocacola image.jpg" class="img-fluid mb-2" alt="Product">
+          <div class="d-flex justify-content-between mb-2">
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-heart"></i></button>
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-arrow-left-right"></i></button>
+            <button class="btn btn-sm btn-success w-100"><i class="bi bi-eye"></i></button>
+          </div>
+          <p class="fw-semibold mb-0">Profitable business makes your profit</p>
+          <small class="text-muted">500g Pack</small>
+          <div class="mt-2">
+            <span class="fw-bold text-danger">$30.00</span>
+            <del class="text-muted ms-1">$36.00</del>
+          </div>
+          <div class="d-flex align-items-center mt-2 mt-auto">
+            <select class="form-select form-select-sm w-auto me-2">
+              <option>1</option><option>2</option><option>3</option>
+            </select>
+            <button class="btn btn-success btn-sm">Add</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="border p-3 bg-white rounded position-relative h-100 d-flex flex-column">
+          <span class="badge bg-warning position-absolute top-0 start-0 m-2">25% Off</span>
+          <img src="./townhouse image.webp" class="img-fluid mb-2" alt="Product">
+          <div class="d-flex justify-content-between mb-2">
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-heart"></i></button>
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-arrow-left-right"></i></button>
+            <button class="btn btn-sm btn-success w-100"><i class="bi bi-eye"></i></button>
+          </div>
+          <p class="fw-semibold mb-0">Profitable business makes your profit</p>
+          <small class="text-muted">500g Pack</small>
+          <div class="mt-2">
+            <span class="fw-bold text-danger">$30.00</span>
+            <del class="text-muted ms-1">$36.00</del>
+          </div>
+          <div class="d-flex align-items-center mt-2 mt-auto">
+            <select class="form-select form-select-sm w-auto me-2">
+              <option>1</option><option>2</option><option>3</option>
+            </select>
+            <button class="btn btn-success btn-sm">Add</button>
+          </div>
+        </div>
+      </div>
+
+
+      
+      <!-- 4 -->
+       <div class="col-6 col-md-4 col-lg-2">
+        <div class="border p-3 bg-white rounded position-relative h-100 d-flex flex-column">
+          <span class="badge bg-warning position-absolute top-0 start-0 m-2">25% Off</span>
+          <img src="./chacolate image.jpg" class="img-fluid mb-2" alt="Product">
+          <div class="d-flex justify-content-between mb-2">
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-heart"></i></button>
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-arrow-left-right"></i></button>
+            <button class="btn btn-sm btn-success w-100"><i class="bi bi-eye"></i></button>
+          </div>
+          <p class="fw-semibold mb-0">Profitable business makes your profit</p>
+          <small class="text-muted">500g Pack</small>
+          <div class="mt-2">
+            <span class="fw-bold text-danger">$30.00</span>
+            <del class="text-muted ms-1">$36.00</del>
+          </div>
+          <div class="d-flex align-items-center mt-2 mt-auto">
+            <select class="form-select form-select-sm w-auto me-2">
+              <option>1</option><option>2</option><option>3</option>
+            </select>
+            <button class="btn btn-success btn-sm">Add</button>
+          </div>
+        </div>
+      </div>
+      
+
+      <!-- 5 -->
+        <div class="col-6 col-md-4 col-lg-2">
+        <div class="border p-3 bg-white rounded position-relative h-100 d-flex flex-column">
+          <span class="badge bg-warning position-absolute top-0 start-0 m-2">25% Off</span>
+          <img src="./chocolate image.jpg" class="img-fluid mb-2" alt="Product">
+          <div class="d-flex justify-content-between mb-2">
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-heart"></i></button>
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-arrow-left-right"></i></button>
+            <button class="btn btn-sm btn-success w-100"><i class="bi bi-eye"></i></button>
+          </div>
+          <p class="fw-semibold mb-0">Profitable business makes your profit</p>
+          <small class="text-muted">500g Pack</small>
+          <div class="mt-2">
+            <span class="fw-bold text-danger">$30.00</span>
+            <del class="text-muted ms-1">$36.00</del>
+          </div>
+          <div class="d-flex align-items-center mt-2 mt-auto">
+            <select class="form-select form-select-sm w-auto me-2">
+              <option>1</option><option>2</option><option>3</option>
+            </select>
+            <button class="btn btn-success btn-sm">Add</button>
+          </div>
+        </div>
+      </div>
+      
+
+      <!-- 6 -->
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="border p-3 bg-white rounded position-relative h-100 d-flex flex-column">
+          <span class="badge bg-warning position-absolute top-0 start-0 m-2">25% Off</span>
+          <img src="./chocolate image.jpg" class="img-fluid mb-2" alt="Product">
+          <div class="d-flex justify-content-between mb-2">
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-heart"></i></button>
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-arrow-left-right"></i></button>
+            <button class="btn btn-sm btn-success w-100"><i class="bi bi-eye"></i></button>
+          </div>
+          <p class="fw-semibold mb-0">Profitable business makes your profit</p>
+          <small class="text-muted">500g Pack</small>
+          <div class="mt-2">
+            <span class="fw-bold text-danger">$30.00</span>
+            <del class="text-muted ms-1">$36.00</del>
+          </div>
+          <div class="d-flex align-items-center mt-2 mt-auto">
+            <select class="form-select form-select-sm w-auto me-2">
+              <option>1</option><option>2</option><option>3</option>
+            </select>
+            <button class="btn btn-success btn-sm">Add</button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <!-- 7 -->
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="border p-3 bg-white rounded position-relative h-100 d-flex flex-column">
+          <span class="badge bg-warning position-absolute top-0 start-0 m-2">25% Off</span>
+          <img src="./cocacola image.jpg" class="img-fluid mb-2" alt="Product">
+          <div class="d-flex justify-content-between mb-2">
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-heart"></i></button>
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-arrow-left-right"></i></button>
+            <button class="btn btn-sm btn-success w-100"><i class="bi bi-eye"></i></button>
+          </div>
+          <p class="fw-semibold mb-0">Profitable business makes your profit</p>
+          <small class="text-muted">500g Pack</small>
+          <div class="mt-2">
+            <span class="fw-bold text-danger">$30.00</span>
+            <del class="text-muted ms-1">$36.00</del>
+          </div>
+          <div class="d-flex align-items-center mt-2 mt-auto">
+            <select class="form-select form-select-sm w-auto me-2">
+              <option>1</option><option>2</option><option>3</option>
+            </select>
+            <button class="btn btn-success btn-sm">Add</button>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- 8 -->
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="border p-3 bg-white rounded position-relative h-100 d-flex flex-column">
+          <span class="badge bg-warning position-absolute top-0 start-0 m-2">25% Off</span>
+          <img src="./cheez it image.jpg" class="img-fluid mb-2" alt="Product">
+          <div class="d-flex justify-content-between mb-2">
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-heart"></i></button>
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-arrow-left-right"></i></button>
+            <button class="btn btn-sm btn-success w-100"><i class="bi bi-eye"></i></button>
+          </div>
+          <p class="fw-semibold mb-0">Profitable business makes your profit</p>
+          <small class="text-muted">500g Pack</small>
+          <div class="mt-2">
+            <span class="fw-bold text-danger">$30.00</span>
+            <del class="text-muted ms-1">$36.00</del>
+          </div>
+          <div class="d-flex align-items-center mt-2 mt-auto">
+            <select class="form-select form-select-sm w-auto me-2">
+              <option>1</option><option>2</option><option>3</option>
+            </select>
+            <button class="btn btn-success btn-sm">Add</button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <!-- 9 -->
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="border p-3 bg-white rounded position-relative h-100 d-flex flex-column">
+          <span class="badge bg-warning position-absolute top-0 start-0 m-2">25% Off</span>
+          <img src="./cerelac image.jpg" class="img-fluid mb-2" alt="Product">
+          <div class="d-flex justify-content-between mb-2">
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-heart"></i></button>
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-arrow-left-right"></i></button>
+            <button class="btn btn-sm btn-success w-100"><i class="bi bi-eye"></i></button>
+          </div>
+          <p class="fw-semibold mb-0">Profitable business makes your profit</p>
+          <small class="text-muted">500g Pack</small>
+          <div class="mt-2">
+            <span class="fw-bold text-danger">$30.00</span>
+            <del class="text-muted ms-1">$36.00</del>
+          </div>
+          <div class="d-flex align-items-center mt-2 mt-auto">
+            <select class="form-select form-select-sm w-auto me-2">
+              <option>1</option><option>2</option><option>3</option>
+            </select>
+            <button class="btn btn-success btn-sm">Add</button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <!-- 10 -->
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="border p-3 bg-white rounded position-relative h-100 d-flex flex-column">
+          <span class="badge bg-warning position-absolute top-0 start-0 m-2">25% Off</span>
+          <img src="./pumpkin image.jpg" class="img-fluid mb-2" alt="Product">
+          <div class="d-flex justify-content-between mb-2">
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-heart"></i></button>
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-arrow-left-right"></i></button>
+            <button class="btn btn-sm btn-success w-100"><i class="bi bi-eye"></i></button>
+          </div>
+          <p class="fw-semibold mb-0">Profitable business makes your profit</p>
+          <small class="text-muted">500g Pack</small>
+          <div class="mt-2">
+            <span class="fw-bold text-danger">$30.00</span>
+            <del class="text-muted ms-1">$36.00</del>
+          </div>
+          <div class="d-flex align-items-center mt-2 mt-auto">
+            <select class="form-select form-select-sm w-auto me-2">
+              <option>1</option><option>2</option><option>3</option>
+            </select>
+            <button class="btn btn-success btn-sm">Add</button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <!-- 11 -->
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="border p-3 bg-white rounded position-relative h-100 d-flex flex-column">
+          <span class="badge bg-warning position-absolute top-0 start-0 m-2">25% Off</span>
+          <img src="./dryfruit image.png" class="img-fluid mb-2" alt="Product">
+          <div class="d-flex justify-content-between mb-2">
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-heart"></i></button>
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-arrow-left-right"></i></button>
+            <button class="btn btn-sm btn-success w-100"><i class="bi bi-eye"></i></button>
+          </div>
+          <p class="fw-semibold mb-0">Profitable business makes your profit</p>
+          <small class="text-muted">500g Pack</small>
+          <div class="mt-2">
+            <span class="fw-bold text-danger">$30.00</span>
+            <del class="text-muted ms-1">$36.00</del>
+          </div>
+          <div class="d-flex align-items-center mt-2 mt-auto">
+            <select class="form-select form-select-sm w-auto me-2">
+              <option>1</option><option>2</option><option>3</option>
+            </select>
+            <button class="btn btn-success btn-sm">Add</button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <!-- 12 -->
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="border p-3 bg-white rounded position-relative h-100 d-flex flex-column">
+          <span class="badge bg-warning position-absolute top-0 start-0 m-2">25% Off</span>
+          <img src="./chacolate image.jpg" class="img-fluid mb-2" alt="Product">
+          
+          <div class="d-flex justify-content-between mb-2">
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-heart"></i></button>
+            <button class="btn btn-sm btn-success w-100 me-1"><i class="bi bi-arrow-left-right"></i></button>
+            <button class="btn btn-sm btn-success w-100"><i class="bi bi-eye"></i></button>
+          </div>
+          <p class="fw-semibold mb-0">Profitable business makes your profit</p>
+          <small class="text-muted">500g Pack</small>
+          <div class="mt-2">
+            <span class="fw-bold text-danger">$30.00</span>
+            <del class="text-muted ms-1">$36.00</del>
+          </div>
+          <div class="d-flex align-items-center mt-2 mt-auto">
+            <select class="form-select form-select-sm w-auto me-2">
+              <option>1</option><option>2</option><option>3</option>
+            </select>
+            <button class="btn btn-success btn-sm">Add</button>
+          </div>
+        </div>
+      </div>
+<div>
+  
+</div>
+
+
+
+
+<div class="container my-5">
+  <div class="row g-4">
+
+    <!-- Box 1 -->
+    <div class="col-12 col-sm-6 col-lg-3">
+      <a href="#" class="text-decoration-none text-dark">
+        <div class="position-relative overflow-hidden rounded shadow-sm" style="height: 320px;">
+          <img src="./corn juice image.webp" alt="Corn Juice"
+            class="w-100 h-100 position-absolute top-0 start-0" style="object-fit: cover; z-index: 0;">
+          <div class="position-absolute top-0 start-0 w-100 h-100 bg-white opacity-25" style="z-index: 1;"></div>
+          <div class="position-relative text-start p-3" style="z-index: 2;">
+            <span class="badge bg-success px-3 py-2 mb-2">Weekend Discount</span>
+            <h5 class="fw-bold mb-1">Drink Fresh Corn Juice</h5>
+            <p class="text-success fs-5 mb-2">Good Taste</p>
+            <div class="d-flex align-items-center fw-bold mt-2">
+              <a href="#" onclick="alert('Corn Juice added!')" class="text-success fs-5 me-2">
+                <i class="bi bi-plus-circle-fill"></i>
+              </a>
+              Shop Now
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Box 2 -->
+    <div class="col-12 col-sm-6 col-lg-3">
+      <a href="#" class="text-decoration-none text-dark">
+        <div class="position-relative overflow-hidden rounded shadow-sm" style="height: 320px;">
+          <img src="./banana chlp imge.webp" alt="Banana Chips"
+            class="w-100 h-100 position-absolute top-0 start-0" style="object-fit: cover; z-index: 0;">
+          <div class="position-absolute top-0 start-0 w-100 h-100 bg-white opacity-25" style="z-index: 1;"></div>
+          <div class="position-relative text-start p-3" style="z-index: 2;">
+            <span class="badge bg-success px-3 py-2 mb-2">Weekend Discount</span>
+            <h5 class="fw-bold mb-1">Organic Lemon Flavored</h5>
+            <p class="text-success fs-5 mb-2">Banana Chips</p>
+            <div class="d-flex align-items-center fw-bold mt-2">
+              <a href="#" onclick="alert('Banana Chips added!')" class="text-success fs-5 me-2">
+                <i class="bi bi-plus-circle-fill"></i>
+              </a>
+              Shop Now
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Box 3 -->
+    <div class="col-12 col-sm-6 col-lg-3">
+      <a href="#" class="text-decoration-none text-dark">
+        <div class="position-relative overflow-hidden rounded shadow-sm" style="height: 320px;">
+          <img src="./chocolate image.jpg" alt="Chocolate Snack"
+            class="w-100 h-100 position-absolute top-0 start-0" style="object-fit: cover; z-index: 0;">
+          <div class="position-absolute top-0 start-0 w-100 h-100 bg-white opacity-25" style="z-index: 1;"></div>
+          <div class="position-relative text-start p-3" style="z-index: 2;">
+            <span class="badge bg-success px-3 py-2 mb-2">Weekend Discount</span>
+            <h5 class="fw-bold mb-1">Nozes Pecanera Brasil</h5>
+            <p class="text-success fs-5 mb-2">Chocolate Snacks</p>
+            <div class="d-flex align-items-center fw-bold mt-2">
+              <a href="#" onclick="alert('Chocolate Snack added!')" class="text-success fs-5 me-2">
+                <i class="bi bi-plus-circle-fill"></i>
+              </a>
+              Shop Now
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Box 4 -->
+    <div class="col-12 col-sm-6 col-lg-3">
+      <a href="#" class="text-decoration-none text-dark">
+        <div class="position-relative overflow-hidden rounded shadow-sm" style="height: 320px;">
+          <img src="./strawberry image.jpg" alt="Strawberry Drink"
+            class="w-100 h-100 position-absolute top-0 start-0" style="object-fit: cover; z-index: 0;">
+          <div class="position-absolute top-0 start-0 w-100 h-100 bg-white opacity-25" style="z-index: 1;"></div>
+          <div class="position-relative text-start p-3" style="z-index: 2;">
+            <span class="badge bg-success px-3 py-2 mb-2">Weekend Discount</span>
+            <h5 class="fw-bold mb-1">Strawberry Water Drinks</h5>
+            <p class="text-success fs-5 mb-2">Flavors Awesome</p>
+            <div class="d-flex align-items-center fw-bold mt-2">
+              <a href="#" onclick="alert('Strawberry Drink added!')" class="text-success fs-5 me-2">
+                <i class="bi bi-plus-circle-fill"></i>
+              </a>
+              Shop Now
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!--Trending products-->
+
+<div class="trending-products">
+    <h2>Top Trending Products</h2>
+    
+    <div class="products-container">
+        <!-- Product 1 -->
+        <div class="product-card">
+            <div class="product-image">
+                <span class="discount-badge">25% OFF</span>
+                <img src="./cocacola image.jpg" alt="Passive Mellin Fluid">
+            </div>
+            <h3>Passive Mellin Fluid</h3>
+            <p class="pack-size">500g Pack</p>
+            <p class="price">
+                <span class="current-price">$36.00</span>
+                <span class="old-price">$96.00</span>
+            </p>
+        </div>
+        
+        <!-- Product 2 -->
+        <div class="product-card">
+            <div class="product-image">
+                <span class="discount-badge">25% OFF</span>
+                <img src="./cookies image.webp" alt="Jet Food">
+            </div>
+            <h3>Jet Food</h3>
+            <p class="pack-size">500g Pack</p>
+            <p class="price">
+                <span class="current-price">$36.00</span>
+                <span class="old-price">$96.00</span>
+            </p>
+        </div>
+        
+        <!-- Product 3 -->
+        <div class="product-card">
+            <div class="product-image">
+                <span class="discount-badge">25% OFF</span>
+                <img src="./dryfruit image.png" alt="Fresh Mango">
+            </div>
+            <h3>Fresh Mango</h3>
+            <p class="pack-size">500g Pack</p>
+            <p class="price">
+                <span class="current-price">$36.00</span>
+                <span class="old-price">$96.00</span>
+            </p>
+        </div>
+        
+        <!-- Product 4 -->
+        <div class="product-card">
+            <div class="product-image">
+                <span class="discount-badge">25% OFF</span>
+                <img src="./cheez it image.jpg" alt="Di Grano Tenero">
+            </div>
+            <h3>Di Grano Tenero</h3>
+            <p class="pack-size">500g Pack</p>
+            <p class="price">
+                <span class="current-price">$36.00</span>
+                <span class="old-price">$96.00</span>
+            </p>
+        </div>
+        
+        <!-- Product 5 -->
+        <div class="product-card">
+            <div class="product-image">
+                <span class="discount-badge">25% OFF</span>
+                <img src="./chacolate image.jpg" alt="Mellin Grano Tenero">
+            </div>
+            <h3>Mellin Grano Tenero</h3>
+            <p class="pack-size">500g Pack</p>
+            <p class="price">
+                <span class="current-price">$36.00</span>
+                <span class="old-price">$96.00</span>
+            </p>
+        </div>
+        
+        <!-- Product 6 -->
+        <div class="product-card">
+            <div class="product-image">
+                <span class="discount-badge">25% OFF</span>
+                <img src="./alpro image.jpg" alt="Grano Tenero">
+            </div>
+            <h3>Grano Tenero</h3>
+            <p class="pack-size">500g Pack</p>
+            <p class="price">
+                <span class="current-price">$36.00</span>
+                <span class="old-price">$96.00</span>
+            </p>
+        </div>
+        
+        <!-- Product 7 -->
+        <div class="product-card">
+            <div class="product-image">
+                <span class="discount-badge">25% OFF</span>
+                <img src="./cerelac image.jpg" alt="Fresh Juice">
+            </div>
+            <h3>Fresh Juice</h3>
+            <p class="pack-size">500g Pack</p>
+            <p class="price">
+                <span class="current-price">$36.00</span>
+                <span class="old-price">$96.00</span>
+            </p>
+        </div>
+        
+        <!-- Product 8 -->
+        <div class="product-card">
+            <div class="product-image">
+                <span class="discount-badge">25% OFF</span>
+                <img src="./biscuit image.jpg" alt="Passive Mellin">
+            </div>
+            <h3>Passive Mellin</h3>
+            <p class="pack-size">500g Pack</p>
+            <p class="price">
+                <span class="current-price">$36.00</span>
+                <span class="old-price">$96.00</span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+.trending-products {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.trending-products h2 {
+    text-align: left;
+    font-size: 24px;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.product-image {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.product-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.03);
+}
+
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #ff5722;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.product-card h3 {
+    font-size: 16px;
+    margin: 8px 0;
+    color: #333;
+}
+
+.pack-size {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+}
+
+.price {
+    margin-top: 10px;
+}
+
+.current-price {
+    font-weight: bold;
+    color: #333;
+    font-size: 16px;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+@media (max-width: 992px) {
+    .products-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .products-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .products-container {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+
+<!--latest  Blog Post Insights-->
+<style>
+.blog-section {
+  background: #f8f9fa;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.blog-card {
+  min-height: 420px;
+}
+
+.blog-card img {
+  height: 240px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.blog-card:hover img {
+  transform: scale(1.05);
+}
+
+.blog-meta {
+  font-size: 14px;
+  color: #888;
+}
+
+.blog-title {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.read-details {
+  font-size: 14px;
+  color: #555;
+  text-decoration: none;
+}
+
+.read-details i {
+  font-size: 14px;
+}
+</style>
+
+
+
+
+<div class="container blog-section">
+  <h4 class="fw-bold mb-4">Latest Blog Post Insights</h4>
+  <div class="row g-3">
+
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="border rounded p-2 bg-white blog-card h-100">
+        <img src="./chacolate image.jpg" alt="Blog 1" class="w-100 mb-2 rounded">
+        <div class="blog-meta mb-1">15 Sep, 2023 &nbsp; | &nbsp; Modern Fashion</div>
+        <div class="blog-title mb-2">Shion Fixation: Fueling Your Passion for All Things Stylish</div>
+        <a href="#" class="read-details"><i class="bi bi-plus-circle me-1"></i> Read Details</a>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="border rounded p-2 bg-white blog-card h-100">
+        <img src="./thali image.jpg" alt="Blog 2" class="w-100 mb-2 rounded">
+        <div class="blog-meta mb-1">15 Sep, 2023 &nbsp; | &nbsp; Modern Fashion</div>
+        <div class="blog-title mb-2">Ashion Fixation: Fueling Your Passion for All Things Stylish</div>
+        <a href="#" class="read-details"><i class="bi bi-plus-circle me-1"></i> Read Details</a>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="border rounded p-2 bg-white blog-card h-100">
+        <img src="./vagetable image.jpg" alt="Blog 3" class="w-100 mb-2 rounded">
+        <div class="blog-meta mb-1">15 Sep, 2023 &nbsp; | &nbsp; Modern Fashion</div>
+        <div class="blog-title mb-2">Fixation: Fueling Your Passion for All Things Stylish</div>
+        <a href="#" class="read-details"><i class="bi bi-plus-circle me-1"></i> Read Details</a>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="border rounded p-2 bg-white blog-card h-100">
+        <img src="./vag image.jpg" alt="Blog 4" class="w-100 mb-2 rounded">
+        <div class="blog-meta mb-1">15 Sep, 2023 &nbsp; | &nbsp; Modern Fashion</div>
+        <div class="blog-title mb-2">Fashion Fixation: Fueling Your Passion for All Things Stylish</div>
+        <a href="#" class="read-details"><i class="bi bi-plus-circle me-1"></i> Read Details</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--end-->
+
+<!--last part-->
+
+<!-- Footer Section -->
+<footer class="bg-light text-dark pt-5">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-md-5 g-4">
+
+      <!-- About Company -->
+      <div class="col">
+        <h6 class="fw-bold">About Company</h6>
+        <p class="mb-1"><i class="bi bi-telephone-fill me-2"></i>Have Question? Call Us 24/7</p>
+        <h5 class="fw-bold text-success">+258 3692 2569</h5>
+        <p class="mb-1">Monday – Friday: <strong>8:00am - 6:00pm</strong></p>
+        <p class="mb-1">Saturday: <strong>8:00am - 6:00pm</strong></p>
+        <p>Sunday: <strong>Service Close</strong></p>
+      </div>
+
+      <!-- Our Stores -->
+      <div class="col">
+        <h6 class="fw-bold">Our Stores</h6>
+        <ul class="list-unstyled">
+          <li>Delivery Information</li>
+          <li>Privacy Policy</li>
+          <li>Terms & Conditions</li>
+          <li>Support Center</li>
+          <li>Careers</li>
+        </ul>
+      </div>
+
+      <!-- Shop Categories -->
+      <div class="col">
+        <h6 class="fw-bold">Shop Categories</h6>
+        <ul class="list-unstyled">
+          <li>Contact Us</li>
+          <li>Information</li>
+          <li>About Us</li>
+          <li>Careers</li>
+          <li>Next Stories</li>
+        </ul>
+      </div>
+
+      <!-- Useful Links -->
+      <div class="col">
+        <h6 class="fw-bold">Useful Links</h6>
+        <ul class="list-unstyled">
+          <li>Cancellation & Returns</li>
+          <li>Report Infringement</li>
+          <li>Payments</li>
+          <li>Shipping</li>
+          <li>FAQ</li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="col">
+        <h6 class="fw-bold">Our Newsletter</h6>
+        <p>Subscribe to the mailing list to receive updates on the new arrivals and other discounts</p>
+        <div class="input-group mb-2">
+          <input type="email" class="form-control" placeholder="Your email address">
+          <button class="btn btn-success">Subscribe</button>
+        </div>
+        <small><input type="checkbox" checked> I would like to receive news and special offer</small>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- Bottom Footer -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center pb-3">
+      <div class="mb-2 mb-md-0">
+        <span>Follow Us:</span>
+        <i class="bi bi-facebook ms-2"></i>
+        <i class="bi bi-twitter ms-2"></i>
+        <i class="bi bi-youtube ms-2"></i>
+        <i class="bi bi-whatsapp ms-2"></i>
+        <i class="bi bi-instagram ms-2"></i>
+      </div>
+      <div class="text-muted">Copyright © 2025 <strong>Ekomart</strong>. All rights reserved.</div>
+    </div>
+
+    <!-- Payment Methods and App Links -->
+    <div class="d-flex justify-content-between align-items-center pb-3">
+      <div><strong>Payment Accepts:</strong> 
+        <img src="./visa image.jpg" width="40" class="ms-2">
+        <img src="paypal image.png" width="40" class="ms-2">
+        <img src="mastercard image.png" width="40" class="ms-2">
+      </div>
+      <div>
+        <strong>Download App:</strong>
+        <img src="./play store image.webp" width="100" class="ms-2">
+        <img src="./appstore image.png" width="100" class="ms-2">
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- Bootstrap JS (required for carousel) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+<!-- Bootstrap JS (for dropdowns if needed) -->
+<script src="https://cdn.jsdelivr.net/npm/boottrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+     
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
+  <!-- </body> -->
+
+  <!-- </html> -->

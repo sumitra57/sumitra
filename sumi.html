@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Laptop Details</h2>
+<p id="laptopDetails"></p>
+
+<script>
+const laptop = {
+    brand: "HP",
+    model: "Inspiron 15",
+    processor: "Intel Core i5",
+    ram: "8GB",
+    storage: "512GB SSD",
+    displaySize: "15.6 inches",
+    price: 50000,
+
+    getDetails: function() {
+        return "Brand: " + this.brand + "<br>" +
+               "Model: " + this.model + "<br>" +
+               "Processor: " + this.processor + "<br>" +
+               "RAM: " + this.ram + "<br>" +
+               "Storage: " + this.storage + "<br>" +
+               "Display Size: " + this.displaySize + "<br>" +
+               "Price: " + this.price;
+    }
+}
+
+document.getElementById("laptopDetails").innerHTML = laptop.getDetails();
+</script>
+
+</body>
+</html>
