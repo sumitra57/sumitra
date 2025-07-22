@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Children Store</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #fdfdfd;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .navbar {
+      background-color: #ffccbc;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      color: #6d4c41 !important;
+    }
+
+    .nav-link,
+    .dropdown-item {
+      color: #6d4c41 !important;
+      font-weight: 500;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, #f2fbe7, #bcf9ff);
+      border-radius: 25px;
+      padding: 40px 30px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-section h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #4e342e;
+    }
+
+    .hero-section p {
+      font-size: 1.3rem;
+      color: #6d4c41;
+    }
+
+    .search-bar input {
+      border-radius: 30px;
+      padding: 15px 25px;
+      border: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-box {
+      border: none;
+      border-radius: 20px;
+      padding: 20px 10px;
+      text-align: center;
+      transition: all 0.3s ease;
+      background: #fff;
+      height: 100%;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category-box img {
+      height: 40px;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .category-box:hover img {
+      transform: scale(1.2) rotate(5deg);
+    }
+
+    .category-box:hover {
+      background: linear-gradient(135deg, #e0f7fa, #e1f5fe);
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0, 174, 255, 0.2);
+    }
+
+    .category-box div {
+      font-weight: 500;
+      color: #333;
+    }
+
+    .section-title {
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .show-all {
+      color: #17a2b8;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .product-card {
+      border: none;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: 0.3s;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    .product-card img {
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .dropdown-submenu {
+      position: relative;
+    }
+
+    .dropdown-submenu>.dropdown-menu {
+      top: 0;
+      left: 100%;
+      margin-top: -1px;
+      display: none;
+    }
+
+    .dropdown-submenu:hover>.dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-submenu>a::after {
+      content: " ▸";
+      float: right;
+    }
+
+    .category-selector input[type="checkbox"] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">KidsStore</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-home"></i> Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"><i class="fas fa-shopping-cart"></i>
+              Shop</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Toys</a>
+              <a class="dropdown-item" href="#">Books</a>
+              <a class="dropdown-item" href="#">Games</a>
+              <a class="dropdown-item" href="#">Art Supplies</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"><i class="fas fa-th-large"></i>
+              Categories</a>
+            <div class="dropdown-menu">
+              <div class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">Toys</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Soft Toys</a></li>
+                  <li><a class="dropdown-item" href="#">Learning Toys</a></li>
+                  <li><a class="dropdown-item" href="#">Electronic Toys</a></li>
+                </ul>
+              </div>
+              <div class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">Books</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Story Books</a></li>
+                  <li><a class="dropdown-item" href="#">Educational Books</a></li>
+                </ul>
+              </div>
+              <a class="dropdown-item" href="#">Puzzles</a>
+              <a class="dropdown-item" href="#">Clothing</a>
+              <a class="dropdown-item" href="#">Art & Craft</a>
+            </div>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-star"></i> Popular</a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CAROUSEL -->
+  <div id="heroCarousel" class="carousel slide mt-4" data-ride="carousel" data-interval="2000">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="hero-section">
+          <div class="row align-items-center">
+            <div class="col-md-6 mb-4 mb-md-0">
+              <h1>Store for children</h1>
+              <p>Shopping with joy</p>
+              <div class="search-bar mt-4">
+                <input type="text" class="form-control" placeholder="Search for toys, books..." />
+              </div>
+            </div>
+            <div class="col-md-6 text-center">
+              <img src="./shopping image.jpg" alt="Children Image" class="img-fluid" style="max-height:250px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="hero-section">
+          <div class="row align-items-center">
+            <div class="col-md-6 mb-4 mb-md-0">
+              <h1>Play & Learn</h1>
+              <p>Fun activities for kids</p>
+              <div class="search-bar mt-4">
+                <input type="text" class="form-control" placeholder="Search educational kits..." />
+              </div>
+            </div>
+            <div class="col-md-6 text-center">
+              <img src="./roboimage.webp" alt="Robot Toy" class="img-fluid" style="max-height:250px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="hero-section">
+          <div class="row align-items-center">
+            <div class="col-md-6 mb-4 mb-md-0">
+              <h1>Creative Corner</h1>
+              <p>Bring out the artist in your child</p>
+              <div class="search-bar mt-4">
+                <input type="text" class="form-control" placeholder="Search art supplies..." />
+              </div>
+            </div>
+            <div class="col-md-6 text-center">
+              <img src="./diy image.webp" alt="DIY Kit" class="img-fluid" style="max-height:250px;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SELECT CATEGORIES -->
+  <div class="container">
+  <div class="d-flex justify-content-between align-items-center mt-5 mb-3">
+    <h5 class="section-title">Select Categories</h5>
+    <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">Show All</a>
+  </div>
+
+  <div class="row">
+    <!-- Category Item -->
+    <div class="col-6 col-md-3 col-lg-2 mb-3 category-selector">
+      <input type="checkbox" id="cat1" hidden />
+      <label for="cat1" class="category-box d-block text-center p-2 border rounded shadow-sm" style="cursor: pointer;">
+        <img src="./image1.png" alt="Plumbing" class="img-fluid mb-2" style="height: 70px;">
+        <div>Plumbing</div>
+      </label>
+    </div>
+
+    <!-- Repeat for Other Categories -->
+    <div class="col-6 col-md-3 col-lg-2 mb-3 category-selector">
+      <input type="checkbox" id="cat2" hidden />
+      <label for="cat2" class="category-box d-block text-center p-2 border rounded shadow-sm" style="cursor: pointer;">
+        <img src="./image2.webp" alt="Creativity" class="img-fluid mb-2" style="height: 70px;">
+        <div>Creativity</div>
+      </label>
+    </div>
+
+    <div class="col-6 col-md-3 col-lg-2 mb-3 category-selector">
+      <input type="checkbox" id="cat3" hidden />
+      <label for="cat3" class="category-box d-block text-center p-2 border rounded shadow-sm" style="cursor: pointer;">
+        <img src="./image3.png" alt="Sports" class="img-fluid mb-2" style="height: 70px;">
+        <div>Sports</div>
+      </label>
+    </div>
+
+    <div class="col-6 col-md-3 col-lg-2 mb-3 category-selector">
+      <input type="checkbox" id="cat4" hidden />
+      <label for="cat4" class="category-box d-block text-center p-2 border rounded shadow-sm" style="cursor: pointer;">
+        <img src="./image4.png" alt="Puzzles" class="img-fluid mb-2" style="height: 70px;">
+        <div>Puzzles</div>
+      </label>
+    </div>
+
+    <div class="col-6 col-md-3 col-lg-2 mb-3 category-selector">
+      <input type="checkbox" id="cat5" hidden />
+      <label for="cat5" class="category-box d-block text-center p-2 border rounded shadow-sm" style="cursor: pointer;">
+        <img src="./image5.png" alt="Clothing" class="img-fluid mb-2" style="height: 70px;">
+        <div>Clothing</div>
+      </label>
+    </div>
+
+    <div class="col-6 col-md-3 col-lg-2 mb-3 category-selector">
+      <input type="checkbox" id="cat6" hidden />
+      <label for="cat6" class="category-box d-block text-center p-2 border rounded shadow-sm" style="cursor: pointer;">
+        <img src="./image6.png" alt="Health" class="img-fluid mb-2" style="height: 70px;">
+        <div>Health</div>
+      </label>
+    </div>
+  </div>
+</div>
+
+
+   <!-- MOST POPULAR -->
+<div class="d-flex justify-content-between align-items-center mt-5 mb-3">
+  <h5 class="section-title position-relative" style="font-weight: 600;">
+    Most Popular
+    <span style="position: absolute; bottom: -5px; left: 0; width: 40px; height: 3px; background-color: #007bff;"></span>
+  </h5>
+  <a href="#" class="btn btn-sm btn-outline-primary rounded-pill px-3">Show All</a>
+</div>
+
+<div class="row">
+  <!-- Product 1 -->
+  <div class="col-sm-6 col-md-3 mb-4">
+    <div class="card product-card shadow-sm border-0 h-100" style="border-radius: 16px; background-color: #f8f9fa;">
+      <img src="./toyimage.jpeg" class="card-img-top rounded-top product-img" alt="Toy"
+        data-toggle="modal" data-target="#productModal1" />
+      <div class="card-body text-center py-3">
+        <h6 class="card-title mb-1 font-weight-bold">Colorful Toy Box</h6>
+        <p class="text-primary mb-0"><i class="fas fa-rupee-sign"></i> 499</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product 2 -->
+  <div class="col-sm-6 col-md-3 mb-4">
+    <div class="card product-card shadow-sm border-0 h-100" style="border-radius: 16px; background-color: #f8f9fa;">
+      <img src="./roboimage.webp" class="card-img-top rounded-top product-img" alt="Robot"
+        data-toggle="modal" data-target="#productModal2" />
+      <div class="card-body text-center py-3">
+        <h6 class="card-title mb-1 font-weight-bold">Buildable Robot</h6>
+        <p class="text-primary mb-0"><i class="fas fa-rupee-sign"></i> 899</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product 3 -->
+  <div class="col-sm-6 col-md-3 mb-4">
+    <div class="card product-card shadow-sm border-0 h-100" style="border-radius: 16px; background-color: #f8f9fa;">
+      <img src="./diy image.webp" class="card-img-top rounded-top product-img" alt="DIY Plant Kit"
+        data-toggle="modal" data-target="#productModal3" />
+      <div class="card-body text-center py-3">
+        <h6 class="card-title mb-1 font-weight-bold">DIY Plant Kit</h6>
+        <p class="text-primary mb-0"><i class="fas fa-rupee-sign"></i> 299</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product 4 -->
+  <div class="col-sm-6 col-md-3 mb-4">
+    <div class="card product-card shadow-sm border-0 h-100" style="border-radius: 16px; background-color: #f8f9fa;">
+      <img src="./book image.jpg" class="card-img-top rounded-top product-img" alt="Story Book"
+        data-toggle="modal" data-target="#productModal4" />
+      <div class="card-body text-center py-3">
+        <h6 class="card-title mb-1 font-weight-bold">Story Book for Kids</h6>
+        <p class="text-primary mb-0"><i class="fas fa-rupee-sign"></i> 199</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Extra CSS -->
+<style>
+  .product-img {
+    height: 170px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  .product-card:hover .product-img {
+    transform: scale(1.05);
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+  }
+</style>
+
+<!-- Font Awesome Link (if not added already in <head>) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+<!-- Optional Hover Effect Script -->
+<style>
+  .product-card:hover img {
+    transform: scale(1.05);
+  }
+</style>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+<!-- ✅ Product Modals (Repeat for each) -->
+<!-- Modal Template: Just replace ID, image, title, price -->
+
+<!-- Product 1 Modal -->
+<div class="modal fade" id="productModal1" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body p-4">
+        <div class="row">
+          <div class="col-md-5 text-center">
+            <img src="./toyimage.jpeg" alt="Colorful Toy Box" class="img-fluid mb-3">
+          </div>
+          <div class="col-md-7">
+            <h5>Colorful Toy Box</h5>
+            <h4 class="text-danger">₹499 <small class="text-muted"><del>₹599</del></small></h4>
+            <h6 class="mt-3">Combo Offers</h6>
+            <ul><li>Buy 2 get 5% off</li><li>Free stickers with purchase</li></ul>
+            <h6>Bank Offers</h6>
+            <ul><li>10% off on HDFC</li><li>₹30 Cashback on Paytm</li></ul>
+            <h6>Delivery</h6><p>Delivered in 3-5 days</p>
+            <h6>Quantity</h6><input type="number" class="form-control w-25" value="1" min="1">
+            <h6 class="mt-3">Highlights</h6>
+            <ul><li>Colorful pieces</li><li>Safe for kids</li></ul>
+            <h6>Seller</h6><p><strong>ToyWorld</strong> (4.5★)</p>
+            <div class="mt-4">
+              <button class="btn btn-warning">Add to Cart</button>
+              <button class="btn btn-success ml-2">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-secondary" data-dismiss="modal">Close</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- Product 2 Modal -->
+<div class="modal fade" id="productModal2" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body p-4">
+        <div class="row">
+          <div class="col-md-5 text-center">
+            <img src="./roboimage.webp" alt="Buildable Robot" class="img-fluid mb-3">
+          </div>
+          <div class="col-md-7">
+            <h5>Buildable Robot</h5>
+            <h4 class="text-danger">₹899 <small class="text-muted"><del>₹999</del></small></h4>
+            <h6 class="mt-3">Combo Offers</h6>
+            <ul><li>Get batteries free</li></ul>
+            <h6>Bank Offers</h6>
+            <ul><li>5% off on ICICI Cards</li></ul>
+            <h6>Delivery</h6><p>Delivered in 2-4 days</p>
+            <h6>Quantity</h6><input type="number" class="form-control w-25" value="1" min="1">
+            <h6 class="mt-3">Highlights</h6>
+            <ul><li>STEM Learning</li><li>Build & Play</li></ul>
+            <h6>Seller</h6><p><strong>RoboShop</strong> (4.6★)</p>
+            <div class="mt-4">
+              <button class="btn btn-warning">Add to Cart</button>
+              <button class="btn btn-success ml-2">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-secondary" data-dismiss="modal">Close</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- Product 3 Modal -->
+<div class="modal fade" id="productModal3" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body p-4">
+        <div class="row">
+          <div class="col-md-5 text-center">
+            <img src="./diy image.webp" alt="DIY Plant Kit" class="img-fluid mb-3">
+          </div>
+          <div class="col-md-7">
+            <h5>DIY Plant Kit</h5>
+            <h4 class="text-danger">₹299 <small class="text-muted"><del>₹349</del></small></h4>
+            <h6 class="mt-3">Combo Offers</h6>
+            <ul><li>Free seeds on 2 kits</li></ul>
+            <h6>Bank Offers</h6>
+            <ul><li>10% UPI Cashback</li></ul>
+            <h6>Delivery</h6><p>Delivered in 5-7 days</p>
+            <h6>Quantity</h6><input type="number" class="form-control w-25" value="1" min="1">
+            <h6 class="mt-3">Highlights</h6>
+            <ul><li>Eco-friendly</li><li>Fun DIY Kit</li></ul>
+            <h6>Seller</h6><p><strong>GreenKids</strong> (4.4★)</p>
+            <div class="mt-4">
+              <button class="btn btn-warning">Add to Cart</button>
+              <button class="btn btn-success ml-2">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-secondary" data-dismiss="modal">Close</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- Product 4 Modal -->
+<div class="modal fade" id="productModal4" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body p-4">
+        <div class="row">
+          <div class="col-md-5 text-center">
+            <img src="./book image.jpg" alt="Story Book" class="img-fluid mb-3">
+          </div>
+          <div class="col-md-7">
+            <h5>Story Book for Kids</h5>
+            <h4 class="text-danger">₹199 <small class="text-muted"><del>₹249</del></small></h4>
+            <h6 class="mt-3">Combo Offers</h6>
+            <ul><li>Buy 3 Get 1 Free</li></ul>
+            <h6>Bank Offers</h6>
+            <ul><li>5% off on Axis Bank</li></ul>
+            <h6>Delivery</h6><p>Delivered in 2-3 days</p>
+            <h6>Quantity</h6><input type="number" class="form-control w-25" value="1" min="1">
+            <h6 class="mt-3">Highlights</h6>
+            <ul><li>Big font</li><li>Illustrated pages</li></ul>
+            <h6>Seller</h6><p><strong>EduBooks</strong> (4.7★)</p>
+            <div class="mt-4">
+              <button class="btn btn-warning">Add to Cart</button>
+              <button class="btn btn-success ml-2">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-secondary" data-dismiss="modal">Close</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL for Product 1 -->
+<div class="modal fade" id="productModal1" tabindex="-1" role="dialog" aria-labelledby="productModalLabel1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body p-4">
+        <div class="row">
+          <!-- Left: Product Image -->
+          <div class="col-md-5 text-center">
+            <img src="./toyimage.jpeg" alt="Colorful Toy Box" class="img-fluid mb-3">
+            <button class="btn btn-warning btn-block">Add to Cart</button>
+            <button class="btn btn-success btn-block mt-2">Buy Now</button>
+          </div>
+
+          <!-- Right: Product Details -->
+          <div class="col-md-7">
+            <h5>Colorful Toy Box</h5>
+            <h4 class="text-danger">₹499 <small class="text-muted"><del>₹599</del></small></h4>
+
+            <!-- Combo Offers -->
+            <div class="mt-3">
+              <h6>Combo Offers</h6>
+              <ul>
+                <li>Buy 2 get 5% off</li>
+                <li>Buy with Robot Toy & get ₹50 off</li>
+              </ul>
+            </div>
+
+            <!-- Bank Offers -->
+            <!-- <div class="mt-3"> -->
+              <h6>Bank Offers</h6>
+              <ul>
+                <li>10% off on HDFC Bank Cards</li>
+                <li>₹30 Cashback on Paytm</li>
+              </ul>
+            </div>
+
+            <!-- Delivery -->
+            <div class="mt-3">
+              <h6>Delivery</h6>
+              <p>Delivered in 3-5 business days</p>
+            </div>
+
+            <!-- Quantity -->
+            <div class="mt-3">
+              <h6>Quantity</h6>
+              <input type="number" class="form-control w-25" value="1" min="1">
+            </div>
+
+            <!-- Highlights -->
+            <div class="mt-3">
+              <h6>Highlights</h6>
+              <ul>
+                <li>Made of Non-toxic Plastic</li>
+                <li>For Ages 3+</li>
+                <li>Bright Colors</li>
+              </ul>
+            </div>
+
+            <!-- Seller Info -->
+            <div class="mt-3">
+              <h6>Seller</h6>
+              <p><strong>ToyWorld</strong> (4.5★) | 10 Days Replacement Policy</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- PRODUCT DETAIL MODAL -->
+  <div class="modal fade" id="productDetailModal" tabindex="-1" role="dialog" aria-labelledby="productDetailModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productDetailModalLabel">Product Details</h5>
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Category:</strong> <span id="detailCategory"></span></p>
+          <p><strong>Color:</strong> <span id="detailColor"></span></p>
+          <p><strong>Size:</strong> <span id="detailSize"></span></p>
+          <p><strong>Price:</strong> ₹<span id="detailPrice"></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="./image6.png" alt="">
+      </div>
+      <div class="col-md-6">
+        <div class="modal-body">
+          <p><strong>Category:</strong> <span id="detailCategory"></span></p>
+          <p><strong>Color:</strong> <span id="detailColor"></span></p>
+          <p><strong>Size:</strong> <span id="detailSize"></span></p>
+          <p><strong>Price:</strong> ₹<span id="detailPrice"></span></p>
+
+
+          <button class="btn btn-primary" type="submit">sbhjdb</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <!-- SCRIPTS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const productDetails = {
+      cat1: { category: "Plumbing", color: "Red", size: "Medium", price: "499" },
+      cat2: { category: "Creativity", color: "Multicolor", size: "Small", price: "399" },
+      cat3: { category: "Sports", color: "Blue", size: "Large", price: "699" },
+      cat4: { category: "Puzzles", color: "Mixed", size: "One Size", price: "299" },
+      cat5: { category: "Clothing", color: "Green", size: "Kids 5-8Y", price: "599" },
+      cat6: { category: "Health", color: "White", size: "Universal", price: "199" }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll('.category-selector input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener("change", () => {
+          const d = productDetails[cb.id];
+          if (d) {
+            document.getElementById("detailCategory").innerText = d.category;
+            document.getElementById("detailColor").innerText = d.color;
+            document.getElementById("detailSize").innerText = d.size;
+            document.getElementById("detailPrice").innerText = d.price;
+            $('#productDetailModal').modal('show');
+            setTimeout(() => cb.checked = false, 400);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
